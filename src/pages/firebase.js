@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, getDocs, addDoc } from 'firebase/firestore';
+import { getFirestore, collection, getDocs, addDoc, doc, updateDoc } from 'firebase/firestore';
 
 const firebaseConfig = {
     apiKey: "AIzaSyAPvCy5aLXDv03EXh8abWuPE88368ddj2s",
@@ -13,32 +13,60 @@ const firebaseConfig = {
   
   const firebase = initializeApp(firebaseConfig);
   const db = getFirestore();
-  
   const projectData = [];
   const taskData = [];
-  let projectId = 0;
+  let projId = "";
 // --------------------------------------------------------------------PROJECT---------------------------------------------------------------------------------//
-  async function getProject() {
+
+async function getProject() {   
     projectData.length = 0;
     const querySnapshot = await getDocs(collection(db, "ProjectTask"));
     querySnapshot.forEach((doc) => {
-    projectData.push(doc.data());
-    console.log(doc.data().projectID)
+    projectData.push(doc.data())            
   });
+  console.log(projectData)
 };
 
+
 function getProjectData(){
-    // console.log(projectData)
     return projectData.sort((a, b)=> a.ID - b.ID);
 }
+
+
+const getUniqueId = async(e)=>{
+     projectData.length = 0;
+    const querySnapshot = await getDocs(collection(db, "ProjectTask"));
+    querySnapshot.forEach((doc) => {
+        if (doc.data().projectTitle == e) {
+            console.log(projId)
+            return projId = doc.id;   
+        }                
+  });   
+}
+
+async function UpdateProject(props, projId) {
+    projectData.length = 0;
+    const querySnapshot = await getDocs(collection(db, "ProjectTask", projId));
+    querySnapshot.forEach((doc) => {
+        updateDoc({
+          projectDescription: props.projectDescription,
+          projectTitle: props.projectTitle
+        })
+  });
+    // const docRef = doc(db, "ProjectTask", projId).updateDoc(docRef, {
+    //     projectTitle: props.projectTitle
+    // });
+    // console.log(getProject())
+    // return getProject()
+}
 //---------------------------------------------------------------------------------//
-async function addProject(props){
+
+async function addProject(props, projId){
     try {
         const docRef = await addDoc(collection(db, "ProjectTask"), {
-          dateCreated: parseInt(props.projectDateCreated),
-          description: props.projectDescription,
-          projectID: projectId++,
-          title: props.projectTitle
+          dateCreated: props.projectDateCreated,
+          projectDescription: props.projectDescription,
+          projectTitle: props.projectTitle
         });
         console.log("Document written with ID: ", docRef.id);
       } catch (e) {
@@ -51,12 +79,10 @@ async function getTask() {
     const querySnapshot = await getDocs(collection(db, "AddTask"));
     querySnapshot.forEach((doc) => {
     taskData.push(doc.data());
-    console.log(doc.data().taskID)
 });
 };
 
 function getTaskData(){
-    // console.log(taskData)
     return taskData.sort((c, d)=> c.ID - d.ID);
 }
 // -----------------------------------------------------------------------------//
@@ -64,6 +90,7 @@ function getTaskData(){
 async function addTask(props){
     try {
         const docRef = await addDoc(collection(db, "AddTask"), {
+          taskID: projId,
           dateCreated: parseInt(props.taskDateCreated),
           description: props.taskDescription,
           dueDate: parseInt(props.DueDate),
@@ -79,9 +106,5 @@ async function addTask(props){
 
 
 
-
-
-
-
 //-------------------------------------------------------------------END-----------------------------------------------------------------------------------------//
-export {getProject, getTask, firebase, db, getProjectData, getTaskData, addProject, addTask}
+export {getProject, getTask, firebase, db, getProjectData, getTaskData, addProject, addTask, getUniqueId, UpdateProject}

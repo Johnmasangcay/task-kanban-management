@@ -9,11 +9,9 @@ import { getProject, getTask } from "./pages/firebase";
 function App() {
   useEffect(()=>{
     getProject()
-  }, [])
-
-  useEffect(()=>{
     getTask()
   }, [])
+
 return(
   <>
   <Router>
