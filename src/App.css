@@ -40,3 +40,11 @@
 .taskCard{
   padding-left: 40%;
 }
+
+.addTaskBtn{
+  padding-left: 20%;
+  padding-right: 15%;
+  padding-top:1%;
+  display: flex;
+  justify-content: center;
+}

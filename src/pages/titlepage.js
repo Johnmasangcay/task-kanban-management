@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 
 
 export default function TitlePage(){
+    
     const history = useHistory();
     return(
         <>
