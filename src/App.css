@@ -48,3 +48,78 @@
   display: flex;
   justify-content: center;
 }
+
+
+.todoInprogCom{
+  display: flex;
+  flex-grow: 1;
+  border: 5px rgb(32, 43, 42) solid;
+  text-align: center;
+  font-family: 'Bungee', cursive;
+  color: aliceblue !important;
+}
+
+.todolist{
+  padding-top: 3%;
+  padding-left: 5%;
+}
+
+.inprogress{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+ 
+}
+
+.todo{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-left: 5%;
+}
+
+.completed{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  
+}
+
+.title{
+  font-family: 'Bungee', cursive;
+  color: aliceblue !important;
+  letter-spacing: 5px;
+}
+
+
+.projSelected{
+  font-family: 'Noto Sans Mono', monospace;
+}
+
+.card-body{
+  justify-content: space-between !important;
+  background: rgb(232, 243, 243) !important;
+  box-shadow: 0 0 10px #525050, 0 0 40px #eeeeee;
+  border-radius: 20px !important;
+  transition-delay: 1s;
+}
+
+.card{
+  justify-content: space-between !important;
+  border-radius: 20px !important;
+  height: 10% !important;
+}
+
+.form-select{
+  box-shadow: 0 0 10px #525050, 0 0 40px #eeeeee !important;
+}
+
+.select{
+  box-shadow: 0 0 10px #525050, 0 0 40px #eeeeee;
+}
+
+.dueDate{
+  font-family: 'Bungee', cursive;
+}
+
+

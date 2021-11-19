@@ -16,6 +16,7 @@ const firebaseConfig = {
   const projectData = [];
   const taskData = [];
   let projId = "";
+  let taskId = "";
 // --------------------------------------------------------------------PROJECT---------------------------------------------------------------------------------//
 
 async function getProject() {   
@@ -33,7 +34,6 @@ function getProjectData(){
 }
 
 const getUniqueId = async(e)=>{
-     projectData.length = 0;
     const querySnapshot = await getDocs(collection(db, "ProjectTask"));
     querySnapshot.forEach((doc) => {
         if (doc.data().projectTitle == e) {
@@ -42,6 +42,16 @@ const getUniqueId = async(e)=>{
   });  
   console.log(projId) 
   return projId  
+}
+const getTaskUniqueId = async(event)=>{
+    const querySnapshot = await getDocs(collection(db, "AddTask"));
+    querySnapshot.forEach((doc) => {
+        console.log(event)
+        if (doc.data().taskTitle == event) {
+            return taskId = doc.id;             
+        }                       
+  });  
+  console.log(taskId)    
 }
 
 const getTaskByID = async(projId)=>{
@@ -52,7 +62,7 @@ const getTaskByID = async(projId)=>{
             taskData.push(doc.data())             
         }                
   });  
-  console.log(taskData)   
+  return taskData   
 }
 
 //---------------------------------------------------------------------------------//
@@ -82,8 +92,28 @@ async function updateProject(projectDescription, projectTitle) {
     })  
 }
 
+async function updateTask(taskTitle, taskStatus, taskPriority, taskDueDate, taskDescription) {
+        const docRef = doc(db, "AddTask", taskId);
+        await updateDoc(docRef,{
+            taskTitle: taskTitle,
+            taskPriority: taskPriority,
+            taskDueDate: taskDueDate,
+            taskDescription: taskDescription,
+            taskStatus: taskStatus
+    })  
+}
+
 async function deleteProject(){
     await deleteDoc(doc(db, "ProjectTask", projId));
+    setTimeout(function (){
+        window.location.reload();
+    }, 500)
+}
+async function deleteTask(){
+    await deleteDoc(doc(db, "AddTask", taskId));
+    setTimeout(function (){
+        window.location.reload();
+    }, 500)
 }
 //-------------------------------------------------------------------TASK-------------------------------------------------------------------------------------//
 async function getTask() {
@@ -92,6 +122,7 @@ async function getTask() {
     querySnapshot.forEach((doc) => {
     taskData.push(doc.data());
 });
+// console.log(taskData)
 };
 
 function getTaskData(){
@@ -103,12 +134,12 @@ async function addTask(props){
     try {
         const docRef = await addDoc(collection(db, "AddTask"), {
           taskID: projId,
-          dateCreated: props.taskDateCreated,
-          description: props.taskDescription,
-          dueDate: props.taskDueDate,
-          priority: props.taskPriority,
-          status: props.taskStatus,
-          title: props.taskTitle
+          taskDateCreated: props.taskDateCreated,
+          taskDescription: props.taskDescription,
+          taskDueDate: props.taskDueDate,
+          taskPriority: props.taskPriority,
+          taskStatus: props.taskStatus,
+          taskTitle: props.taskTitle
         });
         console.log("Document written with ID: ", docRef.id);
       } catch (e) {
@@ -119,4 +150,4 @@ async function addTask(props){
 
 
 //-------------------------------------------------------------------END-----------------------------------------------------------------------------------------//
-export {getProject, getTask, firebase, db, getProjectData, getTaskData, addProject, addTask, getUniqueId, updateProject, deleteProject, getTaskByID}
+export {getProject, getTask, firebase, db, getProjectData, getTaskData, addProject, addTask, getUniqueId, updateProject, deleteProject, getTaskByID, updateTask, getTaskUniqueId, deleteTask}
