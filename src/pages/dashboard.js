@@ -224,9 +224,9 @@ export default function DashboardPage(props) {
                                             <Card.Text> {todoTask.taskDescription} </Card.Text>
                                             <Card.Text className="dueDate"> {todoTask.taskDueDate} </Card.Text>
 
-                                            <OverlayTrigger overlay={<Tooltip id="tooltip">To Edit This task you will need to press your task title then press EDIT! THANK YOU</Tooltip>}>
+                                            <OverlayTrigger overlay={<Tooltip id="tooltip">To Edit or Delete This task you will need to press your task title then press EDIT!   NOTES:When you add a task make sure to refresh it! THANK YOU</Tooltip>}>
                                                 <span >
-                                                    <Button className="" variant="outline-dark" style={{ pointerEvents: 'none' }}>
+                                                    <Button className="" variant="secondary" style={{ pointerEvents: 'none' }}>
                                                         !
                                                     </Button>
                                                 </span>
@@ -251,9 +251,9 @@ export default function DashboardPage(props) {
                                             <Card.Subtitle className="mb-2 title text-muted">{inprogressTask.taskPriority}</Card.Subtitle>
                                             <Card.Text> {inprogressTask.taskDescription} </Card.Text>
                                             <Card.Text className="dueDate"> {inprogressTask.taskDueDate} </Card.Text>
-                                            <OverlayTrigger overlay={<Tooltip id="tooltip">To Edit This task you will need to press your task title then press EDIT! THANK YOU</Tooltip>}>
+                                            <OverlayTrigger overlay={<Tooltip id="tooltip">To Edit or Delete This task you will need to press your task title then press EDIT!   NOTES:When you add a task make sure to refresh it! THANK YOU</Tooltip>}>
                                                 <span >
-                                                    <Button className="" variant="outline-dark" style={{ pointerEvents: 'none' }}>
+                                                    <Button className="" variant="secondary" style={{ pointerEvents: 'none' }}>
                                                         !
                                                     </Button>
                                                 </span>
@@ -277,9 +277,9 @@ export default function DashboardPage(props) {
                                             <Card.Subtitle className="mb-2 title text-muted">{completeTask.taskPriority}</Card.Subtitle>
                                             <Card.Text> {completeTask.taskDescription} </Card.Text>
                                             <Card.Text className="dueDate"> {completeTask.taskDueDate} </Card.Text>
-                                            <OverlayTrigger overlay={<Tooltip id="tooltip">To Edit This task you will need to press your task title then press EDIT! THANK YOU</Tooltip>}>
+                                            <OverlayTrigger overlay={<Tooltip id="tooltip">To Edit or Delete This task you will need to press your task title then press EDIT!   NOTES: When you add a task make sure to refresh it! THANK YOU</Tooltip>}>
                                                 <span >
-                                                    <Button className="" variant="outline-dark" style={{ pointerEvents: 'none' }}>
+                                                    <Button className="" variant="secondary" style={{ pointerEvents: 'none' }}>
                                                         !
                                                     </Button>
                                                 </span>

@@ -94,6 +94,7 @@
 
 .projSelected{
   font-family: 'Noto Sans Mono', monospace;
+  cursor: pointer;
 }
 
 .card-body{
